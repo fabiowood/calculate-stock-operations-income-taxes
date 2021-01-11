@@ -8,8 +8,10 @@ import OperationRegisterForm from '../../components/operation-register-form/oper
 const HomePage = () => {
   return (
     <section className='home-page'>
-      <h1 className='home-page-title'>Calcule o IR - Operações na Bolsa de Valores</h1>
-      <OperationRegisterForm />
+      <div className='home-page-container'>
+        <h1 className='home-page-title'>Registrar Operações de Compra e Venda</h1>
+        <OperationRegisterForm />
+      </div>
     </section>
   )
 };

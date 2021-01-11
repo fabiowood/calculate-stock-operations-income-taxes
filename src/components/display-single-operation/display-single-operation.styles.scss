@@ -1,0 +1,22 @@
+.display-single-operation {
+  width: 100%;
+  height: fit-content;
+  
+  ul {
+    width: 100%;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    border-bottom: 0.1px solid darkgrey;
+
+    li {
+      font-size: 0.7rem;
+      list-style-type: none;
+    }
+    
+    .display-single-operation-first-item {
+      margin-left: 10%;
+    }
+  }
+}
