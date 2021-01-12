@@ -41,11 +41,11 @@ const OperationRegisterForm = ({ updateAveragePriceAndQuantity, calculateStockOp
     brokerage: brokerage,
     createdAt: createdAt,
     };
-    if (operationType === 'Compra') {
-      updateAveragePriceAndQuantity(setOperationInfo);
-    } else {
-      calculateStockOperationResults(setOperationInfo);
-    };
+    operationType === 'Compra' ?
+      updateAveragePriceAndQuantity(setOperationInfo)
+      :
+      calculateStockOperationResults(setOperationInfo)
+      
     setOperationRegistry({
       operationType: '',
       operationDate: '',

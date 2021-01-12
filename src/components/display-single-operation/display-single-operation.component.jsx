@@ -20,7 +20,3 @@ const DisplaySingleOperation = ({ operation }) => {
 };
 
 export default DisplaySingleOperation;
-
-
-// <div className='display-single-operation-item'>$ { .toLocaleString('pt-br', {minimumFractionDigits: 2}) }</div>
-// <div className='display-single-operation-item'>$ { .toLocaleString('pt-br', {minimumFractionDigits: 2}) }</div>}

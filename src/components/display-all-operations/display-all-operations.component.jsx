@@ -6,15 +6,14 @@ import './display-all-operations.scss';
 import DisplaySingleOperation from '../display-single-operation/display-single-operation.component';
 
 const DisplayAllOperations = ({ stockData }) => {
-  const { stockTitle, averagePrice, averageQuantity, accumulatedLoss, operations } = stockData;
+  const { stockTitle, averagePrice, averageQuantity, operations } = stockData;
   return (
     <section className='display-all-operations'>
       <article className='display-all-operations-general-info'>
         <h3>Resultados Gerais: { stockTitle }</h3>
         <ul>
-          <li>Preço Médio: { Number(averagePrice.toFixed(2)) }</li>
-          <li>Quantidade: { averageQuantity }</li>
-          <li>Perdas Acumuladas: { Number(accumulatedLoss.toFixed(2)) }</li>
+          <li>Preço Médio Atual: { Number(averagePrice.toFixed(2)) }</li>
+          <li>Quantidade Remanescente: { averageQuantity }</li>
         </ul>
       </article>
       <ul className='display-all-operations-header'>

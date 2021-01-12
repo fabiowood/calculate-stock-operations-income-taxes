@@ -22,6 +22,8 @@
   padding: 10px 0;
   width: 100%;
   margin-bottom: 10vh;
+  position: fixed;
+  z-index: 999999;
 
   .main-header-link {
     color: white;

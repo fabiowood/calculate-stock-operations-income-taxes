@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector} from 'reselect';
 import { selectAllStockOperations } from '../../redux/calculate-income-taxes.selectors.js';
-import './display-all-operations-preview.styles.scss';
+import './display-results-preview.styles.scss';
 
 // Component Dependencies:
 
-import DisplayAllOperations from '../display-all-operations/display-all-operations.component';
+import DisplayResults from '../display-results/display-results.component';
 
-const DisplayAllOperationsPreview = ({ stockOperations }) => {
+const DisplayResultsPreview = ({ stockOperations }) => {
   const findKeys = [];
   const stockOperationsData = [];
   for (let key in stockOperations) {
@@ -16,13 +16,13 @@ const DisplayAllOperationsPreview = ({ stockOperations }) => {
     stockOperationsData.push(stockOperations[key]);
   }
   return (
-    <section className='display-all-operations-preview'>
-      <div className='display-all-operations-container'>
+    <section className='display-results-preview'>
+      <div className='display-results-container'>
         {
           stockOperationsData.map((item, index) => {
             item.stockTitle = findKeys[index];
             return (
-              <DisplayAllOperations key={ item.stockTitle } stockData={ item } />
+              <DisplayResults key={ item.stockTitle } stockData={ item } />
             )
           })
         }
@@ -35,4 +35,4 @@ const mapStateToProps = createStructuredSelector({
   stockOperations: selectAllStockOperations
 })
 
-export default connect(mapStateToProps)(DisplayAllOperationsPreview);
+export default connect(mapStateToProps)(DisplayResultsPreview);

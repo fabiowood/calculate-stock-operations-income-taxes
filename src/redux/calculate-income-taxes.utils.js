@@ -18,12 +18,10 @@ const registerStockBuyOperation = (...args) => {
   return stockAllOperations[`${stockTitle}`].operations.push({
   operationType: args[2],
   operationDate: args[3],
-  averagePrice: Number(args[4].toFixed(2)),
-  averageQuantity: args[5],
-  operationPrice: Number(Number(args[6]).toFixed(2)),
-  operationQuantity: Number(args[7]),
-  brokerage: Number(Number(args[8]).toFixed(2)),
-  createdAt: args[9],
+  operationPrice: Number(Number(args[4]).toFixed(2)),
+  operationQuantity: Number(args[5]),
+  brokerage: Number(Number(args[6]).toFixed(2)),
+  createdAt: args[7],
   });
 };
 
@@ -33,13 +31,11 @@ const registerStockSellOperation = (...args) => {
   return stockAllOperations[`${stockTitle}`].operations.push({
     operationType: args[2],
     operationDate: args[3],
-    averagePrice: Number(args[4].toFixed(2)),
-    averageQuantity: args[5],
-    operationPrice: Number(Number(args[6]).toFixed(2)),
-    operationQuantity: Number(args[7]),
-    createdAt: args[8],
-    brokerage: Number(Number(args[9]).toFixed(2)),
-    operationEarnedRevenue: Number(Number(args[10]).toFixed(2)),
+    operationPrice: Number(Number(args[4]).toFixed(2)),
+    operationQuantity: Number(args[5]),
+    createdAt: args[6],
+    brokerage: Number(Number(args[7]).toFixed(2)),
+    operationEarnedRevenue: Number(Number(args[8]).toFixed(2)),
   });
 };
 
@@ -62,7 +58,16 @@ const calculateAverageQuantity = (...args) => {
 export const updateAveragePriceAndQuantity = (operationData, currentStockOperations) => {
   const {operationType, operationDate, stockTitle, operationPrice, operationQuantity, brokerage, createdAt } = operationData;
 
-  if (!currentStockOperations.stockOperations[`${stockTitle}`]) {
+  if (!currentStockOperations.stockOperations) {
+    currentStockOperations.stockOperations = { };
+    currentStockOperations.stockOperations[`${stockTitle}`] = {
+      averagePrice: 0.00,
+      averageQuantity: 0.00,
+      accumulatedLoss: 0.00,
+      operations: [],
+      accumulatedIncomeTaxesPerMonth: {  },
+    } 
+  } else if (!currentStockOperations.stockOperations[`${stockTitle}`]) {
     currentStockOperations.stockOperations[`${stockTitle}`] = {
       averagePrice: 0.00,
       averageQuantity: 0.00,
@@ -71,9 +76,8 @@ export const updateAveragePriceAndQuantity = (operationData, currentStockOperati
       accumulatedIncomeTaxesPerMonth: {  },
     }
   }
-  const stockData = findStockData(currentStockOperations.stockOperations[`${stockTitle}`]);
 
-  registerStockBuyOperation(currentStockOperations.stockOperations, `${stockTitle}`, operationType, operationDate, stockData.averagePrice, stockData.averageQuantity, operationPrice, operationQuantity, brokerage, createdAt);
+  registerStockBuyOperation(currentStockOperations.stockOperations, `${stockTitle}`, operationType, operationDate, operationPrice, operationQuantity, brokerage, createdAt);
 
   orderAllOperationsByDate(currentStockOperations.stockOperations[`${stockTitle}`].operations);
 
@@ -83,14 +87,13 @@ export const updateAveragePriceAndQuantity = (operationData, currentStockOperati
 };
 
 export const calculateStockOperationResults = (operationData, currentStockOperations) => {
-  
   const {operationType, operationDate, stockTitle, operationPrice, operationQuantity, brokerage, createdAt } = operationData;
 
   const stockData = findStockData(currentStockOperations.stockOperations[`${stockTitle}`]);
 
   const operationEarnedRevenue = (Number(operationPrice) - stockData.averagePrice) * Number(operationQuantity) - Number(brokerage);
 
-  registerStockSellOperation(currentStockOperations.stockOperations, `${stockTitle}`, operationType, operationDate, stockData.averagePrice, stockData.averageQuantity, operationPrice, operationQuantity, createdAt, brokerage, operationEarnedRevenue);
+  registerStockSellOperation(currentStockOperations.stockOperations, `${stockTitle}`, operationType, operationDate, operationPrice, operationQuantity, createdAt, brokerage, operationEarnedRevenue);
   
   orderAllOperationsByDate(currentStockOperations.stockOperations[`${stockTitle}`].operations);
 
@@ -126,6 +129,8 @@ const recalculateAllOperations = (stockAllData) => {
   stockAllData.averagePrice = 0.00;
   stockAllData.accumulatedLoss = 0.00;
   stockAllData.operations.forEach((operation) => {
+    operation.averagePrice = Number(stockAllData.averagePrice.toFixed(2));
+    operation.averageQuantity = stockAllData.averageQuantity;
     if (operation.operationType === 'Compra') {
       const newAverageQuantity = calculateAverageQuantity(stockAllData.averageQuantity, Number(operation.operationQuantity));
       const newAveragePrice = (stockAllData.averagePrice * stockAllData.averageQuantity + Number(operation.operationPrice) * Number(operation.operationQuantity) + Number(operation.brokerage)) / newAverageQuantity;
@@ -148,8 +153,6 @@ const recalculateAllOperations = (stockAllData) => {
 };
 
 const calculateIncomeTaxesTotalsPerMonth = (stockAllData) => {
-  console.log(stockAllData);
-  console.log(stockAllData.accumulatedIncomeTaxesPerMonth);
   const incomeTaxesByMonth = {};
   let operationMonth = [];
   let operationMonthName = '';
@@ -162,7 +165,6 @@ const calculateIncomeTaxesTotalsPerMonth = (stockAllData) => {
       :
       incomeTaxesByMonth[`${operationMonthName}`] = [item.incomeTax]
     }
-    console.log(incomeTaxesByMonth);
     return incomeTaxesByMonth;
   });
   
@@ -171,7 +173,6 @@ const calculateIncomeTaxesTotalsPerMonth = (stockAllData) => {
     stockAllData.accumulatedIncomeTaxesPerMonth[key] = incomeTaxesByMonth[key];
   }
   
-  console.log(stockAllData.accumulatedIncomeTaxesPerMonth);
   return stockAllData.accumulatedIncomeTaxesPerMonth;
 };
 
@@ -194,6 +195,7 @@ const monthsList = (operationMonth) => {
   for (let key in monthsList) {
     if (monthsList[key] === operationMonth) {
       targetMonth = key;
+      break;
     }
   };
   return targetMonth;

@@ -1,0 +1,23 @@
+.breadcrumb-container {
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+  top: 15vh;
+  right: 16%;
+  font-size: 0.65rem;
+  
+  
+  a {
+    text-decoration: none;
+  }
+
+  .link-to-home {
+    color: black;
+    font-weight: 600;
+  }
+
+  .link-to-present-page {
+    color:blue;
+    font-weight: 700;
+  }
+}
