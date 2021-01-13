@@ -9,7 +9,7 @@ const OperationsGlobalResults = () => {
   return (
     <section className='operations-global-results-display'>
       <div className='operations-global-results-container'>
-        <h1 className='operations-global-results-title'>Resultados Consolidados</h1>
+        <h1 className='operations-global-results-title'>Resultados das Operações de Compra e Venda de Ações <br></br><small>(Valores em R$)</small></h1>
         <DisplayResultsPreview />
       </div>
     </section>

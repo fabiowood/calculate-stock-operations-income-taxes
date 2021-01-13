@@ -1,5 +1,5 @@
 import React from 'react';
-import './display-all-operations.scss';
+import './display-all-operations.styles.scss';
 
 // Component Dependencies:
 
@@ -7,12 +7,13 @@ import DisplaySingleOperation from '../display-single-operation/display-single-o
 
 const DisplayAllOperations = ({ stockData }) => {
   const { stockTitle, averagePrice, averageQuantity, operations } = stockData;
+
   return (
     <section className='display-all-operations'>
       <article className='display-all-operations-general-info'>
-        <h3>Resultados Gerais: { stockTitle }</h3>
+        <h3>{ stockTitle }</h3>
         <ul>
-          <li>Preço Médio Atual: { Number(averagePrice.toFixed(2)) }</li>
+          <li>Preço Médio Atual: R$ { averagePrice ? Number(averagePrice.toFixed(2)) : 0.00}</li>
           <li>Quantidade Remanescente: { averageQuantity }</li>
         </ul>
       </article>

@@ -1,20 +1,23 @@
 .display-single-operation {
   width: 100%;
   height: fit-content;
-  
+
   ul {
     width: 100%;
-    padding: 15px 0;
+    height: 100%;
+    padding: 2.5vh 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
-    border-bottom: 0.1px solid darkgrey;
+    border-bottom: 1.5px solid #696969;
 
     li {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       list-style-type: none;
+      color: #696969;
+      font-weight: 700;
     }
-    
+
     .display-single-operation-first-item {
       margin-left: 10%;
     }

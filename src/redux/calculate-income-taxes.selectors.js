@@ -7,14 +7,3 @@ export const selectAllStockOperations = createSelector(
   calculateIncomeTaxes => calculateIncomeTaxes.stockOperations
 );
 
-export const selectAllInfoByStockTitle = (stockTitle) => createSelector(
-  [selectIncomeTaxes],
-  calculateIncomeTaxes => calculateIncomeTaxes.stockOperations[`${stockTitle}`]
-);
-
-export const selectAllOperationsByStockTitle = (stockTitle) => createSelector(
-  [selectIncomeTaxes],
-  calculateIncomeTaxes => calculateIncomeTaxes.stockOperations[`${stockTitle}`].operations
-);
-
-

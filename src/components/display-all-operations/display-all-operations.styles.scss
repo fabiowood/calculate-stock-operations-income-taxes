@@ -1,12 +1,12 @@
-.display-results {
+.display-all-operations {
   width: 105%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0px 0px 5vh 0px;
 
-  .display-results-general-info {
-    width: 80%;
+  .display-all-operations-general-info {
+    width: 70%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -15,7 +15,7 @@
     color: white;
     padding: 10px 10px;
     border-radius: 4px;
-    margin-bottom: 2.5vh;
+    margin-bottom: 5vh;
 
     h3 {
       font-size: 0.8rem;
@@ -28,16 +28,7 @@
     }
   }
 
-  .display-results-recent-operations-title {
-    width: 100%;
-    height: 100%;
-    margin: 2.5vh auto;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #4F78A4;
-  }
-
-  .display-results-header{
+  .display-all-operations-header{
     width: 100%;
     padding: 15px 0;
     display: flex;
@@ -52,11 +43,5 @@
       color: #696969;
       list-style-type: none;
     }
-  }
-
-  hr {
-    width: 100%;
-    margin-top: 5vh;
-    border: 0.5px solid #4CAF50;
   }
 }

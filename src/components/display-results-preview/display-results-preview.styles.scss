@@ -1,0 +1,42 @@
+.display-results-preview {
+  width: 100%;
+  height: 100%;
+
+  .display-results-preview-container {
+    width: 100%;
+    height: 100%;
+
+    .display-results-preview-select-stock {
+      width: 100%;
+      display: inline-block;
+      margin-bottom: 5vh;
+
+      label {
+        width: 100%;
+        height: 100%;
+        margin: 2.5vh auto;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #696969;
+      }
+
+      select {
+        width: fit-content;
+        padding: 8px 2vw;
+        margin: 8px 2vw;
+        display: inline-block;
+        border: 1.5px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: black;
+
+        &::placeholder {
+          color: #ccc;
+          font-size: 0.75rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

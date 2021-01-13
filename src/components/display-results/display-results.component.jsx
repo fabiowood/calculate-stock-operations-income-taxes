@@ -8,31 +8,36 @@ import DisplayChart from '../../charts/chart.component';
 
 const DisplayResults = ({ stockData }) => {
   const { stockTitle, averagePrice, averageQuantity, accumulatedLoss, accumulatedIncomeTaxesPerMonth, operations } = stockData;
+  
   const incomeTaxesPerMonth = () => {
     let monthIncomeTaxes = 0.00;
     let displayMonthIncomeTaxes = [];
     for (let key in accumulatedIncomeTaxesPerMonth) {
       monthIncomeTaxes = Number(accumulatedIncomeTaxesPerMonth[key].toFixed(2));
-      displayMonthIncomeTaxes.push(<li>{`${key}`}: R$ { monthIncomeTaxes }</li>);
+      displayMonthIncomeTaxes.push(<li>{`${key}`} = R$ { monthIncomeTaxes }</li>);
     }
+    displayMonthIncomeTaxes.length ? 
+    displayMonthIncomeTaxes.unshift(<li>Imposto de Renda Acumulado por Mês:</li>)
+    :
+    displayMonthIncomeTaxes.unshift(<li>Não há impostos a pagar até o momento!</li>)
+
     return displayMonthIncomeTaxes.map((item) => item)
   }
-  const stockInfo = [{stockData}];
+  
   return (
     <section className='display-results'>
       <article className='display-results-general-info'>
-        <h3>Resultados Gerais: { stockTitle }</h3>
+        <h3>{ stockTitle }</h3>
         <ul>
-          <li>Preço Médio Atual: { Number(averagePrice.toFixed(2)) }</li>
+          <li>Preço Médio Atual: R$ { averagePrice ? Number(averagePrice.toFixed(2)) : 0.00}</li>
           <li>Quantidade Remanescente: { averageQuantity }</li>
-          <li>Perdas Acumuladas: { Number(accumulatedLoss.toFixed(2)) }</li>
-          <li>Imposto de Renda Acumulado por Mês</li>
+          <li>Perdas Acumuladas: { accumulatedLoss ? `R$ ${Number(accumulatedLoss.toFixed(2))}` : `R$ 0.00`}</li>
           {
             incomeTaxesPerMonth()
           }
         </ul>
       </article>
-      <p>Operações Recentes</p>
+      <p className='display-results-recent-operations-title'>Operações Mais Recentes - { stockTitle }</p>
       <ul className='display-results-header'>
         <li className='header-block'>
           <span>Data da Operação</span>
@@ -64,6 +69,7 @@ const DisplayResults = ({ stockData }) => {
         })
       }
       <DisplayChart stockData={ stockData } />
+      <hr />
     </section>
   )
 }

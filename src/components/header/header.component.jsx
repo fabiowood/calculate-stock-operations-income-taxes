@@ -7,7 +7,7 @@ const Header = () => {
       <header className="header">
         <a
           className="main-header-link"
-          href="/table-manager"
+          href="/"
         >
           <img src={logo} className="App-logo" alt="logo" />
           <span>AppCalculadora IR</span>

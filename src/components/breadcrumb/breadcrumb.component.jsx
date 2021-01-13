@@ -17,7 +17,7 @@ const BreadCrumb = () => {
   }
   return (
     <section className='breadcrumb-container'>
-      <p className='breadcrumb-location'>Você está em: <a href='/' className='link-to-home'>Home</a> {`=>`} <strong><a href={window.location.pathname} className='link-to-present-page'>{locationAdjustedPathName}</a></strong></p> 
+      <p>Você está em: <a href='/' >Home</a> {`=>`} <strong><a href={window.location.pathname}>{locationAdjustedPathName}</a></strong></p> 
     </section>
   )
 };

@@ -9,7 +9,7 @@ const MyOperationsDisplay = () => {
   return (
     <section className='my-operations-display'>
       <div className='my-operations-container'>
-        <h1 className='my-operations-title'>Visualizar Operações de Compra e Venda</h1>
+        <h1 className='my-operations-title'>Consultar Operações de Compra e Venda de Ações <br></br><small>(Valores em R$)</small></h1>
         <DisplayAllOperationsPreview />
       </div>
     </section>
